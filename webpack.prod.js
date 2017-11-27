@@ -1,4 +1,5 @@
 const merge = require('webpack-merge');
+const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const common = require('./webpack.common.js');
@@ -20,6 +21,9 @@ module.exports = merge(common, {
   	new ExtractTextPlugin("[name].bundle.css"),
     new UglifyJSPlugin({
     	sourceMap: true
+    }),
+    new webpack.DefinePlugin({
+    	'process.env.NODE_ENV': JSON.stringify('production')
     })
   ]
 });
